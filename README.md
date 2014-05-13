@@ -1,6 +1,6 @@
 # DockerfileAst
 
-TODO: Write a gem description
+Convert a Dockerfile into a very basic ast, then output it as an array or string
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+rake parse DOCKERFILE=/path/to/dockerfile
+
+Edit DockerfileAst::Parser's parse method to return an approximation of the AST with to_array or a dockerfile with to_s.
 
 ## Contributing
 

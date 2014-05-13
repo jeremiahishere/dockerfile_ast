@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = DockerfileAst::VERSION
   spec.authors       = ["Jeremiah Hemphill"]
   spec.email         = ["jeremiah@cloudspace.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Convert a Dockerfile into a basic AST}
+  spec.description   = %q{Parse a Dockerfile, the write the parsed data back to a file.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

@@ -1,0 +1,21 @@
+# this is a comment
+FROM jeremiahishere/sample
+
+MAINTAINER Jeremiah Hemphill <jeremiah@cloudspace.com>
+
+RUN echo 'hello world'
+RUN['echo', 'hello world']
+
+CMD command param1 param2
+
+EXPOSE 21
+ENV APP_ENV production
+
+ADD source_file.sh target_file.sh
+ENTRYPOINT command param1 param2
+
+USER daemon
+VOLUME ["/data"]
+WORKDIR /path/to/workdir
+
+ONBUILD RUN echo 'hello'
