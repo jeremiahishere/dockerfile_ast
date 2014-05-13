@@ -5,7 +5,7 @@ grammar DockerfileGrammar
   end
 
   rule comment
-    space? '#' space? rest_of_line end_of_line? <DockerfileAst::Node::Comment>
+    space? '#' space? rest_of_line <DockerfileAst::Node::Comment>
   end
 
   rule instruction 

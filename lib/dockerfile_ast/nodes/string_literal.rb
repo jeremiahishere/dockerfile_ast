@@ -4,6 +4,10 @@ module DockerfileAst
       def to_array
         self.text_value
       end
+
+      def to_s
+        self.text_value
+      end
     end
   end
 end

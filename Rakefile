@@ -76,5 +76,5 @@ RUN echo moo > oink
 # You'll now have two images, 907ad6c2736f with /bar, and 695d7793cbe4 with
 # /oink.
 DOCK
-  puts parser.parse(df).inspect
+  puts parser.parse(df)
 end

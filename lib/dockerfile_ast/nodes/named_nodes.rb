@@ -8,18 +8,38 @@ module DockerfileAst
       def to_array
         [title] + elements.map(&:to_array)
       end
+
+      def to_s
+        "#{title.to_s.upcase} #{elements_to_s}"
+      end
+
+      def elements_to_s
+        elements.map(&:to_s).join("\n")
+      end
     end
 
     class Instruction < NamedNode
       def title; :instruction end
+
+      def to_s
+        elements_to_s
+      end
     end
 
     class Comment < NamedNode
       def title; :comment end
+
+      def to_s
+        "# #{elements[0].to_s}"
+      end
     end
 
     class Dockerfile < NamedNode
       def title; :dockerfile end
+
+      def to_s
+        elements_to_s
+      end
     end
 
 
