@@ -5,5 +5,7 @@ task :parse do
   parser = DockerfileAst::Parser.new
   filename = ENV.has_key?('DOCKERFILE') ? ENV['DOCKERFILE'] : 'Dockerfile.sample'
   dockerfile = File.read(filename)
-  puts parser.parse(dockerfile)
+  ast = parser.parse(dockerfile)
+  writer = DockerfileAst::Writer.new(ast)
+  puts writer.write(:string)
 end

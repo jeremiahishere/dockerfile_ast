@@ -15,14 +15,8 @@ module DockerfileAst
 
       # this edits the tree in place
       clean_tree(tree)
-      # convert the parse tree to a readable array for now      
-      if return_type == :tree
-        return tree
-      elsif return_type == :array
-        return tree.to_array
-      else
-        return tree.to_s
-      end
+
+      return tree
     end
   
     def clean_tree(root_node)
