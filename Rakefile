@@ -3,6 +3,11 @@ require 'dockerfile_ast'
 
 task :parse do
   parser = DockerfileAst::Parser.new
-  puts parser.parse('hello world')
-  puts parser.parse('goodbye world') 
+  df = <<-DOCK
+# this is a comment
+FROM imightbeinatree/sshable
+
+MAINTAINER Michael Orr <michael@cloudspace.com>
+DOCK
+  puts parser.parse(df).inspect
 end

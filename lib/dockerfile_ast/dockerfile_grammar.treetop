@@ -1,0 +1,46 @@
+grammar DockerfileGrammar
+  rule body
+    ( command / comment / end_of_line )* <DockerfileAst::Node::Dockerfile>
+  end
+
+  rule comment
+    space? '#' space? rest_of_line end_of_line <DockerfileAst::Node::Comment>
+  end
+
+  rule command
+    space? ( from / maintainer ) space? end_of_line? <DockerfileAst::Node::Command>
+  end
+
+  rule from
+    'FROM' space? string_without_spaces <DockerfileAst::Node::FromCommand>
+  end
+
+  rule maintainer
+    'MAINTAINER' space? rest_of_line <DockerfileAst::Node::MaintainerCommand>
+  end
+
+  rule name
+    ([\w]* space?)* <DockerfileAst::Node::StringLiteral>
+  end
+
+  rule email
+    '<' [\w]+ '@' [\w]+ '.' [\w]+ '>' <DockerfileAst::NodeStringLiteral>
+  end
+
+  rule string_without_spaces
+    [\S]* <DockerfileAst::Node::StringLiteral>
+  end
+
+  rule rest_of_line
+    [^\n]* <DockerfileAst::Node::StringLiteral>
+  end
+
+  rule end_of_line
+    [\n]+
+  end
+
+  # allow whitespace anywhere but match it last
+  rule space
+    [\s]+
+  end
+end

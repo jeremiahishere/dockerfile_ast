@@ -1,5 +1,0 @@
-grammar DockerfileGrammar
-  rule hello
-    'hello world'
-  end
-end
