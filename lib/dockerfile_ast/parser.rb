@@ -6,7 +6,7 @@ module DockerfileAst
       @parser = DockerfileGrammarParser.new
     end
 
-    def parse(data)
+    def parse(data, return_type = :string)
       tree = @parser.parse(data)
 
       if(tree.nil?)
@@ -16,7 +16,13 @@ module DockerfileAst
       # this edits the tree in place
       clean_tree(tree)
       # convert the parse tree to a readable array for now      
-      return tree.to_s
+      if return_type == :tree
+        return tree
+      elsif return_type == :array
+        return tree.to_array
+      else
+        return tree.to_s
+      end
     end
   
     def clean_tree(root_node)
