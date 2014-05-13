@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'dockerfile_parser/version'
+require 'dockerfile_ast/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "dockerfile_parser"
-  spec.version       = DockerfileParser::VERSION
+  spec.name          = "dockerfile_ast"
+  spec.version       = DockerfileAst::VERSION
   spec.authors       = ["Jeremiah Hemphill"]
   spec.email         = ["jeremiah@cloudspace.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}
@@ -20,4 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
+
+  spec.add_dependency 'treetop'
 end
