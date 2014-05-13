@@ -6,15 +6,71 @@ module DockerfileAst
       end
 
       def to_array
-        [:title] + elements.map(&:to_array)
+        [title] + elements.map(&:to_array)
       end
     end
 
-    class FromCommand < NamedNode
-      def title
-        :from
-      end
+    class Instruction < NamedNode
+      def title; :instruction end
     end
 
+    class Comment < NamedNode
+      def title; :comment end
+    end
+
+    class Dockerfile < NamedNode
+      def title; :dockerfile end
+    end
+
+
+    #  INSTRUCTIONS
+
+    class AddInstruction < NamedNode
+      def title; :add end
+    end
+
+    class CmdInstruction < NamedNode
+      def title; :cmd end
+    end
+
+    class EntrypointInstruction < NamedNode
+      def title; :entrypoint end
+    end
+
+    class EnvInstruction < NamedNode
+      def title; :env end
+    end
+
+    class ExposeInstruction < NamedNode
+      def title; :expose end
+    end
+
+    class FromInstruction < NamedNode
+      def title; :from end
+    end
+
+    class MaintainerInstruction < NamedNode
+      def title; :maintainer end
+    end
+
+    class OnbuildInstruction < NamedNode
+      def title; :onbuild end
+    end
+
+    class RunInstruction < NamedNode
+      def title; :run end
+    end
+
+    class UserInstruction < NamedNode
+      def title; :user end
+    end
+
+    class VolumeInstruction < NamedNode
+      def title; :volume end
+    end
+
+    class WorkdirInstruction < NamedNode
+      def title; :workdir end
+    end
   end
 end

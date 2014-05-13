@@ -1,31 +1,72 @@
+# TODO: create a parameter system the accepts a list of parameters delimited by spaces, or string in an array
 grammar DockerfileGrammar
   rule body
-    ( command / comment / end_of_line )* <DockerfileAst::Node::Dockerfile>
+    ( instruction / comment / end_of_line )* <DockerfileAst::Node::Dockerfile>
   end
 
   rule comment
-    space? '#' space? rest_of_line end_of_line <DockerfileAst::Node::Comment>
+    space? '#' space? rest_of_line end_of_line? <DockerfileAst::Node::Comment>
   end
 
-  rule command
-    space? ( from / maintainer ) space? end_of_line? <DockerfileAst::Node::Command>
+  rule instruction 
+    space? instruction_type space? end_of_line? <DockerfileAst::Node::Instruction>
+  end
+
+  # INSTRUCTIONS 
+
+  rule instruction_type
+    from / maintainer / run / cmd / expose / env / add / entrypoint / volume / user / workdir / onbuild
+  end
+
+  rule add
+    'ADD' space? rest_of_line <DockerfileAst::Node::AddInstruction>
+  end
+
+  rule cmd
+    'CMD' space? rest_of_line <DockerfileAst::Node::CmdInstruction>
+  end
+
+  rule entrypoint
+    'ENTRYPOINT' space? rest_of_line <DockerfileAst::Node::EntrypointInstruction>
+  end
+
+  rule env
+    'ENV' space? rest_of_line <DockerfileAst::Node::ExposeInstruction>
+  end
+
+  rule expose
+    'EXPOSE' space? rest_of_line <DockerfileAst::Node::ExposeInstruction>
   end
 
   rule from
-    'FROM' space? string_without_spaces <DockerfileAst::Node::FromCommand>
+    'FROM' space? string_without_spaces <DockerfileAst::Node::FromInstruction>
   end
 
   rule maintainer
-    'MAINTAINER' space? rest_of_line <DockerfileAst::Node::MaintainerCommand>
+    'MAINTAINER' space? rest_of_line <DockerfileAst::Node::MaintainerInstruction>
   end
 
-  rule name
-    ([\w]* space?)* <DockerfileAst::Node::StringLiteral>
+  rule onbuild
+    'ONBUILD' space? instruction <DockerfileAst::Node::OnbuildInstruction>
   end
 
-  rule email
-    '<' [\w]+ '@' [\w]+ '.' [\w]+ '>' <DockerfileAst::NodeStringLiteral>
+  rule run
+    'RUN' space? rest_of_line <DockerfileAst::Node::RunInstruction>
   end
+
+  rule user
+    'USER' space? rest_of_line <DockerfileAst::Node::UserInstruction>
+  end
+
+  rule volume
+    'VOLUME' space? rest_of_line <DockerfileAst::Node::VolumeInstruction>
+  end
+
+  rule workdir
+    'WORKDIR' space? rest_of_line <DockerfileAst::Node::WorkdirInstruction>
+  end
+
+  # END INSTRUCTIONS
 
   rule string_without_spaces
     [\S]* <DockerfileAst::Node::StringLiteral>
